@@ -1,0 +1,32 @@
+@media only screen and (max-width: 767px) {
+  .app {
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+  }
+  body {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(rgba(235, 247, 255, 0.7)));
+    background-image: linear-gradient(to bottom, #ffffff, rgba(235, 247, 255, 0.7));
+    background-size: auto;
+  }
+  .form_container {
+    height: 100%;
+    display: block !important;
+  }
+  .form_container .form_wrapper {
+    width: 100%;
+    background-color: transparent;
+    margin: auto;
+    padding: 0;
+    border: 0 none;
+  }
+  .form_container .form_title {
+    text-align: left;
+    font-size: 20px;
+  }
+  .form_container .form_field {
+    font-family: "Open Sans" !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+  }
+}
+/*# sourceMappingURL=media.css.map */

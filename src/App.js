@@ -1,14 +1,13 @@
 import { useHistory } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
 import { getStorage } from "../src/config/storage";
-import Header from "./components/header";
-import Footer from "./components/footer";
-import Register from "./components/register";
+import LeftPanel from "./components/LeftPanel";
+import AccountSetting from "./components/Settings";
 
 function App() {
   const history = useHistory();
   const storage = getStorage();
-
+  //
   const pathChecker = () => {
     if (storage === null || !storage.isvalid) {
       history.push({
@@ -24,13 +23,9 @@ function App() {
   pathChecker();
   return (
     <>
-      <div className="app m-8">
-        <Header />
-        <Switch>
-          <Route exact path="/" render={() => <Register />} />
-        </Switch>
-      </div>
-      <Footer />
+      <Switch>
+        <Route exact path="/" render={() => <AccountSetting />} />
+      </Switch>
     </>
   );
 }

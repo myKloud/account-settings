@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const Input = (props) => {
+  console.log("props", props);
   const [has_value, set_value] = useState(false);
 
   const setValueHandler = (e) => {
