@@ -33,7 +33,7 @@ const MyKloudAccount = (props) => {
         <CgProfile size="24px" color="rgb(27,105,216)" />
         {Localization.profile}
       </div>
-      <div className={showProfileDetails ? "show_profile" : "hide_profile"}>
+      <div className={showProfileDetails ? "show" : "hide"}>
         <input
           style={{ display: "block" }}
           placeholder={Localization.profileDetails.firstName}
@@ -51,7 +51,7 @@ const MyKloudAccount = (props) => {
         <img src={passIMG} width="24" height="24"></img>
         <div>Password</div>
       </div>
-      <div className={showProfileDetails ? "show_profile" : "hide_profile"}>
+      <div className={showPasswordDetails ? "show" : "hide"}>
         <input
           style={{ display: "block" }}
           placeholder={Localization.profileDetails.firstName}
@@ -59,9 +59,21 @@ const MyKloudAccount = (props) => {
         <input placeholder={Localization.profileDetails.lastName}></input>
       </div>
 
-      <div className="box">
+      <div
+        className="box"
+        onClick={() => {
+          setShowRecoveryDetails(!showRecoveryDetails);
+        }}
+      >
         <img src={recvIMG} width="24" height="24"></img>
         <div>Account recovery</div>
+      </div>
+      <div className={showRecoveryDetails ? "show" : "hide"}>
+        <input
+          style={{ display: "block" }}
+          placeholder={Localization.profileDetails.firstName}
+        ></input>
+        <input placeholder={Localization.profileDetails.lastName}></input>
       </div>
     </div>
   );

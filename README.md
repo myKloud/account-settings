@@ -6,7 +6,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-    - npm install
     - npm package
     - docker
 
@@ -47,8 +46,9 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## docker
 
-    - npm docker:  create a docker image
-    - npm react-docker:  run the docker image in localhost:3000
+    - npm install
+    - npm run docker:  create a docker image
+    - npm run react-docker:  run the docker image in localhost:3000
 
 ## Learn More
 
