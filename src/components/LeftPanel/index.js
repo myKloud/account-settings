@@ -23,18 +23,7 @@ const LeftPanel = (props) => {
   Localization.setLanguage(lang);
   return (
     <>
-      <div
-        // style={
-        //   !leftPanelVisibility
-        //     ? { visibility: "hidden" }
-        //     : {
-        //         visibility: "visible important",
-        //         width: "268px",
-        //         "padding-left": "37px",
-        //       }
-        // }
-        className={"leftPanel_container"}
-      >
+      <div className={"leftPanel_container"}>
         <div className="mykloud_logo"></div>
         <div className="leftPanel_button">
           <AiFillHome size="24px" />

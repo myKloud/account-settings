@@ -5,19 +5,22 @@ import Localization from "./localization";
 import passIMG from "../../images/password.svg";
 import recvIMG from "../../images/account recoverysvg.svg";
 import { CgProfile } from "react-icons/cg";
+import Input from "./../common/input";
 import "./style.scss";
 
 // Component
-import Input from "../common/input";
 
 const MyKloudAccount = (props) => {
   const history = useHistory();
   const location = useLocation();
 
+  // show state
   const [showProfileDetails, setShowProfileDetails] = useState(false);
   const [showPasswordDetails, setShowPasswordDetails] = useState(false);
   const [showRecoveryDetails, setShowRecoveryDetails] = useState(false);
 
+  // input state
+  const [firstName, setFirstName] = useState("");
   const { lang } = props.languageReducer;
   Localization.setLanguage(lang);
 
@@ -25,7 +28,7 @@ const MyKloudAccount = (props) => {
     <div className="myKloud_account_container">
       <div style={{ "margin-bottom": "3px" }}>{Localization.title}</div>
       <div
-        className="box"
+        className=" box"
         onClick={() => {
           setShowProfileDetails(!showProfileDetails);
         }}
@@ -34,14 +37,23 @@ const MyKloudAccount = (props) => {
         {Localization.profile}
       </div>
       <div className={showProfileDetails ? "show" : "hide"}>
-        <input
+        <Input
+          type="text"
+          value={firstName}
+          onChange={(e) => {
+            setFirstName(e);
+            console.log(firstName);
+            // validate(form_validation.username, e);
+          }}
+          placeholder={Localization.profileDetails.firstName}
+          // className={userMessage && "validation"}
+        />
+        {/* <input
           style={{ display: "block" }}
           placeholder={Localization.profileDetails.firstName}
-        ></input>
+        ></input> */}
         <input placeholder={Localization.profileDetails.lastName}></input>
       </div>
-
-      {/*  */}
       <div
         className="box"
         onClick={() => {

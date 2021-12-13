@@ -23,7 +23,7 @@ const AccountSetting = (props) => {
   Localization.setLanguage(lang);
   return (
     <>
-      <section className="main_container">
+      <section className="main_container form_container">
         <LeftPanel leftPanelVisibility={leftPanelVisibility} />
         <section className="setting_container">
           <nav className="settings_bar">

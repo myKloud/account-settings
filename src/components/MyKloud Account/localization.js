@@ -8,6 +8,11 @@ const Localization = new LocalizedStrings({
       firstName: "FirstName",
       lastName: "LirstName",
     },
+    password: "password",
+    profileDetails: {
+      firstName: "FirstName",
+      lastName: "LirstName",
+    },
   },
 });
 
