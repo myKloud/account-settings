@@ -8,19 +8,16 @@ const TopPanel = (props) => {
   const history = useHistory();
   const location = useLocation();
 
-
-
   const { lang } = props.languageReducer;
   Localization.setLanguage(lang);
   return (
     <div className="TopPanel-container">
-        <button className="upgrage-button">Upgrade</button>
-        <div style={{width:"20px" ,height:"20px" , background :"black"}}></div>
-        <div style={{width:"20px" ,height:"20px" , background :"black"}}></div>
-        <div className="name-icon" >
-            <div >AM</div>
-        </div>
-
+      <button className="upgrage-button">Upgrade</button>
+      <div style={{ width: "20px", height: "20px", background: "black" }}></div>
+      <div style={{ width: "20px", height: "20px", background: "black" }}></div>
+      <div className="name-icon">
+        <div>AM</div>
+      </div>
     </div>
   );
 };

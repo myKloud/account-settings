@@ -15,6 +15,11 @@ import { setOTP } from "../../actions/otpAction";
 import { setStorage } from "../../config/storage";
 import { generateOTP } from "../../config/util";
 import { sendOtp } from "../../services/register";
+import Verification from "../../components/codeVerification";
+import ReactPhoneInput from "react-phone-input-2";
+import { isValidPhoneNumber } from "react-phone-number-input";
+
+import "react-phone-input-2/lib/style.css";
 
 import "./style.scss";
 
@@ -29,16 +34,13 @@ const MyKloudAccount = (props) => {
   const [showProfileDetails, setShowProfileDetails] = useState(false);
   const [showPasswordDetails, setShowPasswordDetails] = useState(false);
   const [showRecoveryDetails, setShowRecoveryDetails] = useState(false);
-  const [showEmailRecovery, setShowEmailRecovery] = useState(true);
-  const [isEmailActive, setIsEmailActive] = useState(true);
-  const [showPohneRecovery, setShowPohneRecovery] = useState(false);
-  const [isPhoneActive, setIsPhoneActive] = useState(false);
   const [method, setMethod] = useState("email");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
   const [emailMessage, setEmailMessage] = useState("");
   const [numberMessage, setNumberMessage] = useState("");
   const [showCode, setShowCode] = useState(false);
+
   const validEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
   const form_validation = {
@@ -85,11 +87,10 @@ const MyKloudAccount = (props) => {
       if (!value.length) {
         setNumberMessage(input.required);
         is_valid = false;
+      } else if (!isValidPhoneNumber(`+${number}`)) {
+        setNumberMessage(input.required);
+        is_valid = false;
       }
-      //  else if (!isValidPhoneNumber(`+${number}`)) {
-      //     setNumberMessage(input.required);
-      //     is_valid = false;
-      // }
     }
 
     return is_valid;
@@ -187,7 +188,7 @@ const MyKloudAccount = (props) => {
         {!showCode ? (
           <div className="recovery_container">
             <div className="form_wrapper">
-              <div className="form_sub_content">
+              <div className="form_sub_content recovery_container">
                 <div className="button_container">
                   <div
                     className={
@@ -267,31 +268,31 @@ const MyKloudAccount = (props) => {
                   </div>
                 ) : (
                   <>
-                    <div className="wrapper mb-2">
-                      {/* <ReactPhoneInput
-                                            inputExtraProps={{
-                                                name: "phone",
-                                                required: true,
-                                                autoFocus: true,
-                                            }}
-                                            inputClass={`phone_input ${
-                                                numberMessage && "validation"
-                                            }`}
-                                            buttonClass={`country_dropdown ${
-                                                numberMessage && "validation"
-                                            }`}
-                                            value={number}
-                                            onChange={(e) => {
-                                                setNumber(e);
-                                                // validate(form_validation.number, e);
-                                            }}
-                                            country={"us"}
-                                        /> */}
+                    <>
+                      <div className="wrapper mb-2">
+                        <ReactPhoneInput
+                          inputExtraProps={{
+                            name: "phone",
+                            required: true,
+                            autoFocus: true,
+                          }}
+                          inputClass={`phone_input ${
+                            numberMessage && "validation"
+                          }`}
+                          buttonClass={`country_dropdown ${
+                            numberMessage && "validation"
+                          }`}
+                          value={number}
+                          onChange={(e) => {
+                            setNumber(e);
+                            // validate(form_validation.number, e);
+                          }}
+                          country={"us"}
+                        />
 
-                      {/* {numberMessage && (
-                                            <Validation error={numberMessage} />
-                                        )} */}
-                    </div>
+                        {numberMessage && <Validation error={numberMessage} />}
+                      </div>
+                    </>
                   </>
                 )}
 
@@ -309,7 +310,7 @@ const MyKloudAccount = (props) => {
             </div>
           </div>
         ) : (
-          ""
+          <Verification />
         )}
 
         {/* ////////////////////////////// */}
