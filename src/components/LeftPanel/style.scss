@@ -1,45 +1,83 @@
 @import "../../css/variables.scss";
 
 * {
-  font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 .leftPanel_container {
-  border-radius: 12px;
-  width: 268px;
-  min-height: 750px;
-  height: 100%;
-  padding-left: 18px;
-  padding-top: 21px;
-  box-shadow: 0 10px 49px 0 rgba(0, 0, 0, 0.13);
-  .mykloud_logo {
-    width: 150px;
-    height: 54px;
-    background-image: url(../../images/myKloud_logo.png);
-    background-size: 150px;
-    cursor: pointer;
-  }
-  .leftPanel_button {
-    display: flex;
-    gap: 16.3px;
-    margin-left: 7px;
-    margin-top: 50px;
-    align-items: center;
-    .leftPanel_text {
-      background-color: white;
-      font-size: 18px;
-      font-weight: 600;
+    position: relative;
+    border-radius: 12px;
+    width: 268px;
+    min-height: 750px;
+    height: 900px;
+    padding-left: 18px;
+    padding-top: 8px;
+    box-shadow: 0 10px 49px 0 rgba(0, 0, 0, 0.13);
+    .mykloud_logo {
+        width: 123px;
+        height: 50px;
+        background-image: url(../../images/myKloud_logo.png);
+        background-size: 123px;
+        cursor: pointer;
     }
-  }
+
+    .left-panel {
+        margin-top: 54px;
+        .storage {
+            flex-grow: 1;
+            position: absolute;
+            bottom: 0px;
+        }
+    }
+    .Back-to-menu {
+        display: flex;
+        column-gap: 10px;
+        cursor: pointer;
+        margin-bottom: 54px;
+        color: #649fdb;
+        font-size: 18px;
+        .back {
+            height: 24px;
+            width: 24px;
+            background-color: black;
+        }
+    }
+    .leftPanel_button {
+        display: flex;
+        gap: 12px;
+        margin-left: 9px;
+        margin-top: 24px;
+        align-items: center;
+
+        .leftPanel_text {
+            font-size: 14px;
+            letter-spacing: 0.14px;
+        }
+    }
+    .leftPanel_button:hover {
+        color: #649fdb;
+
+        background-color: rgba(100, 159, 219, 0.1);
+        border-radius: 6px;
+        font-size: 14px;
+        letter-spacing: 0.14px;
+        width: 196px;
+        height: 32px;
+    }
+    .left-panel-icon {
+        background-color: black;
+        width: 14px;
+        height: 14px;
+    }
+    .show-left {
+        display: block;
+    }
+    .hide-left {
+        display: none !important;
+    }
 }
 
 @media only screen and (max-width: 767px) {
-  .leftPanel_container {
-    position: fixed;
-    z-index: 1000;
-    height: 100vh;
-    visibility: hidden;
-    background-color: white;
-    width: 0px;
-    padding-left: 0px;
-  }
+    .leftPanel_container {
+        display: none;
+    }
 }

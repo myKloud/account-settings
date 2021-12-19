@@ -1,53 +1,109 @@
 .main_container {
-  .myKloud_account_container,
-  .myKloud_others_container {
-    position: relative;
-    top: 72px;
-    width: 95%;
-    height: 262;
-
-    .box {
-      position: relative;
-      display: flex;
-      height: 50px;
-      align-items: center;
-      padding-left: 27px;
-      max-width: 700px;
-      font-size: 16px;
-      gap: 21px;
-      margin-top: 27px;
-      border: solid 0.1px rgb(180, 185, 187);
-      border-radius: 6px;
-      background-color: #f1f6fa;
-      cursor: pointer;
-    }
-    .box::after {
-      content: "";
-      position: absolute;
-      right: 17px;
-      width: 20px;
-      height: 20px;
-      background-size: cover;
-      background-image: url(../../images/arraow.svg);
-    }
-  }
-
-  .show {
-    display: block;
-  }
-  .hide {
-    display: none;
-  }
-
-  @media only screen and (max-width: 767px) {
     .myKloud_account_container,
     .myKloud_others_container {
-      top: 20px !important;
-      margin-top: 15px;
+        position: relative;
+        margin-top: calc(51px - 22px);
+        max-width: 455px;
+        height: 262;
+
+        .box {
+            position: relative;
+            display: flex;
+            height: 50px;
+            align-items: center;
+            padding-left: 27px;
+            max-width: 700px;
+            font-size: 16px;
+            gap: 21px;
+            margin-top: 22px;
+            border: solid 0.1px rgb(180, 185, 187);
+            border-radius: 6px;
+            background-color: #f1f6fa;
+            cursor: pointer;
+        }
+        .box::after {
+            content: "";
+            position: absolute;
+            right: 17px;
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+            background-image: url(../../images/arraow.svg);
+        }
     }
-    .box {
-      margin-top: 22px !important;
-      height: 65px !important;
+
+    .show {
+        display: block;
+        flex-grow: 1;
+        // border: 1px solid blue
     }
-  }
+    .hide {
+        display: none;
+    }
+    .account-recovery-method {
+        display: flex;
+        justify-content: center;
+        column-gap: 10px;
+        margin-top: 25px;
+        width: 100%;
+        .account-recovery-box {
+            display: flex;
+            width: 218px;
+            column-gap: 9.6px;
+            align-items: center;
+            font-size: 14px;
+            height: 56px;
+            box-shadow: 0 4px 14px 1px rgba(0, 0, 0, 0.04);
+            border-radius: 6px;
+            padding: 15px 63px 15px 12.8px;
+            border-radius: 6px;
+            cursor: pointer;
+            img {
+                background-color: black;
+                width: 27.8px;
+                height: 26px;
+            }
+            div {
+                width: 110px;
+            }
+        }
+        .account-recovery-box-active {
+            border: 0.5px solid #1b73d1;
+            color: #1b73d1;
+            background-color: #e2f4ff;
+            border-radius: 6px;
+        }
+        .account-recovery-box:hover {
+            border: 0.5px solid #1b73d1;
+            color: #1b73d1;
+            background-color: #e2f4ff;
+        }
+    }
+    .p-1 {
+        color: rgba(0, 0, 0, 0.35);
+        font-size: 14px;
+        height: 21px;
+        margin-top: 25px;
+    }
+    .p-2 {
+        color: rgba(0, 0, 0, 0.35);
+        font-size: 16px;
+        height: 21px;
+        margin-top: 10px;
+        font-family: OpenSans;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .myKloud_account_container,
+        .myKloud_others_container {
+            min-width: 100% !important;
+            margin-top: 137px;
+            max-width: 1000px !important;
+        }
+        .box {
+            margin-top: 20px !important;
+            margin-left: 24px;
+            margin-right: 24px;
+        }
+    }
 }

@@ -3,66 +3,59 @@ import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import Localization from "./localization";
 import LeftPanel from "../LeftPanel";
-import passIMG from "../../images/password.svg";
-import recvIMG from "../../images/account recoverysvg.svg";
+import TopPanel from "../TopPanel";
 
 import "./style.scss";
-import { CgProfile } from "react-icons/cg";
-import { MdArrowForwardIos } from "react-icons/md";
 import MyKloudAccount from "../MyKloud Account";
 
 const AccountSetting = (props) => {
-  const [leftPanelVisibility, setLeftPanelVisibility] = useState(false);
+    const [show, setShow] = useState(false);
+    const history = useHistory();
+    const location = useLocation();
 
-  const history = useHistory();
-  const location = useLocation();
+    useEffect(() => {});
 
-  useEffect(() => {});
-
-  const { lang } = props.languageReducer;
-  Localization.setLanguage(lang);
-  return (
-    <>
-      <section className="main_container form_container">
-        <LeftPanel leftPanelVisibility={leftPanelVisibility} />
-        <section className="setting_container">
-          <nav className="settings_bar">
-            <span style={{ "font-weight": "600", "font-size": "20px" }}>
-              Settings
-            </span>
-            <div className="setting_dotes">...</div>
-          </nav>
-          <section className="setting_main_container">
-            <MyKloudAccount />
-            <div className="myKloud_others_container">
-              <div style={{ "margin-bottom": "3px" }}>Others</div>
-              <div className="box">
-                <CgProfile size="24px" color="rgb(27,105,216)" />
-                <div>Device access</div>
-              </div>
-              <div className="box">
-                <CgProfile size="24px" color="rgb(27,105,216)" />
-                <div>Language preference</div>
-              </div>
-              <div className="box">
-                <CgProfile size="24px" color="rgb(27,105,216)" />
-                <div>About</div>
-              </div>
-            </div>
-          </section>
-        </section>
-      </section>
-    </>
-  );
+    const { lang } = props.languageReducer;
+    Localization.setLanguage(lang);
+    return (
+        <>
+            <section className="main_container">
+                <LeftPanel setShow={setShow} show={show} />
+                <div className="raight-panel-container">
+                    <TopPanel />
+                    <section className="setting_container">
+                        <div className="nav-fixed">
+                            <nav className="settings_bar">
+                                <div className="logo-mobile"></div>
+                                <div
+                                    className="mobile-response"
+                                    style={{
+                                        "font-weight": "600",
+                                        "font-size": "20px",
+                                    }}
+                                >
+                                    myKloud Account Settingss
+                                </div>
+                                <div className="setting_dotes">x</div>
+                            </nav>
+                        </div>
+                        <section className={`setting_main_container`}>
+                            <MyKloudAccount />
+                        </section>
+                    </section>
+                </div>
+            </section>
+        </>
+    );
 };
 
 const mapStateToProps = ({ languageReducer, userReducer }) => ({
-  languageReducer,
-  userReducer,
+    languageReducer,
+    userReducer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatch,
+    dispatch,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountSetting);
