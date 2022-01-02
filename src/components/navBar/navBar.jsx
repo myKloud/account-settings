@@ -1,9 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import Localization from "./localization";
+import { useHistory } from "react-router-dom";
 import "./style.scss";
 
 const NavBar = (props) => {
+  console.log("props", props);
+  const history = useHistory();
   const { lang } = props.languageReducer;
   Localization.setLanguage(lang);
 
@@ -12,9 +15,16 @@ const NavBar = (props) => {
       <nav className="settings-bar">
         <div className="logo-mobile"></div>
         <div className="mobile-response">
-          {Localization.myKloudAccountSettings}
+          {!props.notShow === "notShow"
+            ? ""
+            : Localization.myKloudAccountSettings}
         </div>
-        <div className="setting-dotes"></div>
+        <div
+          className="setting-dotes"
+          onClick={() => {
+            history.push("./settings");
+          }}
+        ></div>
       </nav>
     </div>
   );
