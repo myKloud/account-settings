@@ -114,7 +114,7 @@ const AccountSettingProfile = (props) => {
             </div>
             <div className="save-button-container">
               <button className="next" onClick={saveInfo}>
-                Save
+                {Localization.save}
               </button>
             </div>
           </div>

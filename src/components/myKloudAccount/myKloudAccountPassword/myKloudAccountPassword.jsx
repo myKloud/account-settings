@@ -81,7 +81,7 @@ const MyKloudAccountPassword = () => {
         ></div>
 
         <div className="pass-icon"></div>
-        <div>Password</div>
+        <div>{Localization.passowrd_placeholder}</div>
       </div>
       <div className={showPasswordDetails ? "show" : "hide"}>
         <div className="form-container">
@@ -179,7 +179,7 @@ const MyKloudAccountPassword = () => {
             </div>
             <div className="save-button-container">
               <button className="next" onClick={savePassword}>
-                Save
+                {Localization.save}
               </button>
             </div>
           </div>

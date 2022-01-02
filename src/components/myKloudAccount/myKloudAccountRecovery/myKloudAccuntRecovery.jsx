@@ -20,7 +20,7 @@ import "./style.scss";
 
 // Component
 import Input from "../../common/input";
-
+import formValidation from "./../formValidation";
 let interval;
 
 const MyKloudAccountRecovery = (props) => {
@@ -42,19 +42,6 @@ const MyKloudAccountRecovery = (props) => {
   const [pre, setPre] = useState(false);
   const validEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
-  const formValidation = {
-    email: {
-      name: "email",
-      required: Localization.validation.email.required,
-      redundant: Localization.validation.email.redundant,
-    },
-    number: {
-      name: "number",
-      required: Localization.validation.number.required,
-    },
-  };
-
-  ///
   let reduxMin = userObj.min;
   let reduxSeconds = userObj.seconds;
 
@@ -155,7 +142,6 @@ const MyKloudAccountRecovery = (props) => {
         isValid = false;
       }
     }
-
     return isValid;
   };
 
