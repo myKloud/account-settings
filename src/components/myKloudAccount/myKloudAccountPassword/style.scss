@@ -1,0 +1,44 @@
+@import "../../../css/variables.scss";
+
+.password-container {
+  width: 100%;
+
+  .password-message {
+    color: rgba(0, 0, 0, 0.35);
+    font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 22px;
+  }
+  .password-margin {
+    margin-bottom: 22px;
+  }
+  .extra-padding {
+    padding-right: 5rem !important;
+  }
+  .validation {
+    border-color: $error !important;
+  }
+
+  .password-mask {
+    -webkit-text-security: disc;
+    -moz-webkit-text-security: disc;
+    -moz-text-security: disc;
+  }
+  .input_visibilty {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    padding: 10px;
+    color: $primary_color;
+    background-color: $primary_color_visa;
+    text-align: left;
+    border: none;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: 767px) {
+  }
+}

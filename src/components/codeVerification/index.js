@@ -1,123 +1,149 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import VerificationInput from "../common/verificationInput";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./style.scss";
 import Localization from "./localization";
 import {
   removeStorage,
   setStorage,
-  setFirstResend,
-  setSecondResend,
-  setThirdResend,
-  getFirstResend,
-  getSecondResend,
-  getThirdResend,
-  removeResend,
+  getResend,
+  setResend,
 } from "../../config/storage";
-import { sendOtp, signUp } from "../../services/register";
-
+import { sendOtp } from "../../services/register";
+import { Button, Modal } from "react-bootstrap";
+import Validation from "../common/validation";
+import { changeRecovery } from "./../../services/accountSetting";
+//
+let interval;
+//
 const CodeVerification = (props) => {
-  const location = useLocation();
-  const [times, setTimes] = useState(1);
-  // const recovery = props.recovery || location.state.value || "01012345678";
+  const recovery = props.recovery || "01012345678";
+  const recoveryObj = { value: recovery[0], method: recovery[1] };
   const [seconds, setSeconds] = useState(59);
-  const [data, setData] = useState("");
   const [min, setMin] = useState(0);
   const [code, setCode] = useState("");
-  const form_validation = {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const formValidation = {
     resend: {
       name: "resend",
       wait: Localization.validation.resend.wait,
     },
   };
-  const [error, setError] = useState(() => form_validation.resend.wait);
-  const user_obj = props.userReducer;
+  const [error, setError] = useState(() => formValidation.resend.wait);
+  const [verifyError, setVerifyError] = useState("");
+  const userObj = props.userReducer;
   const otp = props.otpReducer;
-
-  const signup = async () => {
-    const x = await signUp({
-      username: user_obj.username,
-      firstName: user_obj.firstname,
-      lastName: user_obj.lastname,
-      password: user_obj.password,
-      recovery: user_obj.recovery,
-    });
-    setData(x);
-  };
+  //
+  const [isTimer, setIsTimer] = useState(false);
+  let reduxMin = userObj.min;
+  let reduxSeconds = userObj.seconds;
 
   const resendCode = () => {
     sendOtp({
-      value: location.state.value,
+      value: recoveryObj.value,
       otp: otp.otp,
     });
-    if (times < 3) {
-      setTimes(() => times + 1);
-    } else {
-      removeResend();
-      setTimes(() => 1);
-      // setFirstResend(recovery, "13");
+    // interval = setInterval(() => {
+    //   setIsTimer(true);
+    //   setSeconds((seconds) => seconds - 1);
+    // }, 1000);
+
+    if (getResend() === "first") {
+      setResend("second");
+      setMin(1);
+      setSeconds(0);
+    } else if (getResend() === "second") {
+      setResend("third");
+      setMin(15);
+      setSeconds(0);
+      setError(() => formValidation.resend.wait);
+    } else if (getResend() === "third") {
+      setMin(15);
+      setSeconds(0);
+      setError(() => formValidation.resend.wait);
     }
-    setMin(0);
-    setSeconds(59);
   };
 
-  useEffect(() => {
-    if (!getFirstResend()) {
-      // setFirstResend(recovery, "13");
-    } else if (getFirstResend().recoveryData === location.state.value) {
-      if (!getSecondResend()) {
-        setTimes(() => 2);
-      } else if (getSecondResend().recoveryData === location.state.value) {
-        if (getSecondResend() && !getThirdResend()) {
-          setTimes(() => 3);
-        } else if (getThirdResend()) {
-          setMin(14);
-          setTimes(() => 4);
-        }
-      } else {
-        // setSecondResend(recovery, "15");
-      }
-    } else {
-      // setFirstResend(recovery, "13");
-    }
+  //
 
-    if (seconds > 0) {
-      setInterval(() => {
-        setSeconds((seconds) => seconds - 1);
-      }, 1000);
-    }
-    // return () => clearInterval(interval);
+  useEffect(() => {
     const lang = props.languageReducer.lang;
     Localization.setLanguage(lang);
-  }, [props.languageReducer.lang, location.state.value]);
+  }, [props.languageReducer.lang, userObj.recovery]);
+
+  //
 
   useEffect(() => {
-    if (times === 2) {
-      // setSecondResend(recovery, "15");
+    if (reduxMin !== 0) {
+      setMin(reduxMin);
     }
 
-    if (times === 3) {
-      // setThirdResend(recovery, "18");
-      setMin(14);
+    if (reduxSeconds > 0) {
+      setSeconds(reduxSeconds);
     }
-  }, [times]);
+    if (getResend() === "first" && reduxMin === 0 && reduxSeconds === 0) {
+      setMin(1);
+      setSeconds(0);
+    }
+    if (getResend() === "second" && reduxMin === 0 && reduxSeconds === 0) {
+      setMin(1);
+      setSeconds(0);
+    }
+
+    if (getResend() === "third" && reduxMin === 0 && reduxSeconds === 0) {
+      setMin(15);
+      setSeconds(0);
+      setError(() => formValidation.resend.wait);
+    }
+
+    interval = setInterval(() => {
+      setIsTimer(true);
+      setSeconds((seconds) => seconds - 1);
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     if (seconds < 0 && min > 0) {
       setMin((min) => min - 1);
       setSeconds(59);
     }
+
+    if (seconds === 0 && min === 0 && isTimer) {
+      clearInterval(interval);
+    }
+  }, [seconds, min]);
+
+  useEffect(() => {
+    userObj.min = min;
+  }, [min]);
+
+  useEffect(() => {
+    if (seconds > 0) {
+      userObj.seconds = seconds;
+    }
   }, [seconds]);
 
   const history = useHistory();
+
   const pre = () => {
-    setStorage("recovery");
+    clearInterval(interval);
+
     if (props.setStage) {
       props.setStage("recovery");
     } else {
+      props.setShowCode(false);
+      setStorage("recovery");
+      props.setPre(!props.pre);
       history.push({
-        pathname: "/recovery",
+        pathname: "/accountSettings",
+        // state: {
+        //   min: min,
+        //   seconds: seconds,
+        // },
       });
     }
   };
@@ -135,30 +161,40 @@ const CodeVerification = (props) => {
 
     // TODO
     if (otp.otp == code) {
-      signup()
-        .then((res) => {
-          console.log(data);
-        })
+      const information = {
+        username: "yash@mykmail.io",
+        recovery: props.email ? props.email : props.number,
+      };
+      // sed it to back end
+      changeRecovery(information);
+
+      handleShow()
+        .then((res) => {})
         .catch((err) => {
           console.log("err");
         });
+    } else {
+      setVerifyError("Incorrect code, try again.");
     }
   };
 
   return (
     <>
-      <div className="form_container verification_container">
-        <div className="form_wrapper">
-          <h1 className="form_title">{`${Localization.title}`}</h1>
-          {/* <p className="subtitle mb-8">{recovery}</p> */}
+      <div className="recovery-form-container verification-containers">
+        <div className="form-wrapper">
+          <h1 className="form-title">{`${Localization.title}`}</h1>
+          <p className="subtitle">{recoveryObj.value}</p>
 
-          <div className="input_wrapper">
-            <VerificationInput setCode={setCode} />
-
+          <div className="input-wrapper">
+            <VerificationInput
+              setCode={setCode}
+              setVerifyError={setVerifyError}
+            />
+            {verifyError && <Validation error={verifyError} />}
             {min > 0 ? <p className=" error">{error}</p> : ""}
-
             <div className="flex mt-4">
-              <p className="info mr-1">{Localization.not_recieve}</p>
+              <p className="info mr-1">{Localization.notRecieve}</p>
+
               {min > 0 || (min === 0 && seconds > 0) ? (
                 <>
                   <p className="timer">
@@ -174,19 +210,16 @@ const CodeVerification = (props) => {
                 </>
               )}
             </div>
-
             <div className="flex mt-4">
-              {location.state.method === "email" ? (
-                <p className="info mr-1">{Localization.not_your_email}</p>
+              {recoveryObj.value.method === "email" ? (
+                <p className="info mr-1">{Localization.notYourEmail}</p>
               ) : (
-                <p className="info mr-1">{Localization.not_your_number}</p>
+                <p className="info mr-1">{Localization.notYourNumber}</p>
               )}
-
               <p className="action" onClick={pre}>
                 {Localization.change}
               </p>
             </div>
-
             <div className="flex mt-4 justify-between ...">
               <button className="pre" onClick={pre}>
                 {Localization.previous}
@@ -194,6 +227,30 @@ const CodeVerification = (props) => {
               <button className="verify" onClick={verifyCode}>
                 {Localization.verify}
               </button>
+              {show && (
+                <Modal
+                  className="modal-flex-container"
+                  show={show}
+                  onHide={handleClose}
+                >
+                  <Modal.Body className="modal-flex-body">
+                    <div className="modal-logo"></div>
+                    <h1 className="modal-success">
+                      {Localization.modal.success}
+                    </h1>
+                    <p className="modal-message">
+                      {Localization.modal.updatedMessage}
+                    </p>
+                    <Button
+                      className="modal-button"
+                      variant="primary"
+                      onClick={handleClose}
+                    >
+                      Done
+                    </Button>
+                  </Modal.Body>
+                </Modal>
+              )}
             </div>
           </div>
         </div>

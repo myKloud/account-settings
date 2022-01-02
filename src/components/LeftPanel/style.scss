@@ -1,83 +1,156 @@
 @import "../../css/variables.scss";
 
-* {
-    font-family: "Poppins", sans-serif;
-}
-.leftPanel_container {
-    position: relative;
-    border-radius: 12px;
-    width: 268px;
-    min-height: 750px;
-    height: 900px;
-    padding-left: 18px;
-    padding-top: 8px;
-    box-shadow: 0 10px 49px 0 rgba(0, 0, 0, 0.13);
-    .mykloud_logo {
-        width: 123px;
-        height: 50px;
-        background-image: url(../../images/myKloud_logo.png);
-        background-size: 123px;
-        cursor: pointer;
-    }
+.leftPanel-container {
+  position: relative;
+  border-radius: 12px;
+  width: 268px;
+  height: 900px;
+  padding-left: 18px;
+  padding-top: 8px;
+  box-shadow: 0 10px 49px 0 rgba(0, 0, 0, 0.13);
+  .mykloud-logo {
+    width: 123px;
+    height: 50px;
+    background-image: url("../../images/myKloud_logo.png");
+    background-size: contain;
+    cursor: pointer;
+  }
 
-    .left-panel {
-        margin-top: 54px;
-        .storage {
-            flex-grow: 1;
-            position: absolute;
-            bottom: 0px;
-        }
-    }
+  .left-panel {
+    margin-top: 54px;
+
     .Back-to-menu {
-        display: flex;
-        column-gap: 10px;
-        cursor: pointer;
-        margin-bottom: 54px;
-        color: #649fdb;
-        font-size: 18px;
-        .back {
-            height: 24px;
-            width: 24px;
-            background-color: black;
-        }
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+      cursor: pointer;
+      margin-bottom: 54px;
+      color: #649fdb;
+      font-size: 18px;
+      .back {
+        height: 24px;
+        width: 24px;
+        background-size: 24px 24px;
+        background-image: url("../../images/ios-arrow-back-4-32.png");
+      }
     }
-    .leftPanel_button {
-        display: flex;
-        gap: 12px;
-        margin-left: 9px;
-        margin-top: 24px;
-        align-items: center;
-
-        .leftPanel_text {
-            font-size: 14px;
-            letter-spacing: 0.14px;
-        }
-    }
-    .leftPanel_button:hover {
-        color: #649fdb;
-
-        background-color: rgba(100, 159, 219, 0.1);
-        border-radius: 6px;
+    .leftPanel-button {
+      display: flex;
+      gap: 12px;
+      margin-left: 9px;
+      margin-top: 24px;
+      align-items: center;
+      border-radius: 6px;
+      font-size: 14px;
+      letter-spacing: 0.14px;
+      width: 196px;
+      height: 32px;
+      .leftPanel-text {
         font-size: 14px;
         letter-spacing: 0.14px;
-        width: 196px;
-        height: 32px;
+      }
     }
-    .left-panel-icon {
-        background-color: black;
-        width: 14px;
-        height: 14px;
+    .leftPanel-button:hover {
+      color: #649fdb;
+      background-color: rgba(100, 159, 219, 0.1);
     }
-    .show-left {
-        display: block;
+    .activeButton {
+      color: #649fdb;
+      background-color: rgba(100, 159, 219, 0.1);
     }
-    .hide-left {
-        display: none !important;
+    %left-panel-icon {
+      width: 14px;
+      height: 14px;
+      background-size: 14px 14px;
     }
+
+    .left-panel-icon-kmailSetting {
+      @extend %left-panel-icon;
+      background-image: url("./../../images/setting.svg");
+    }
+
+    .left-panel-icon-accountSetting {
+      @extend %left-panel-icon;
+      background-image: url("./../../images/accountSetting.svg");
+    }
+    .left-panel-icon-help {
+      @extend %left-panel-icon;
+      background-image: url("./../../images/help.png");
+    }
+    .left-panel-icon-legal {
+      @extend %left-panel-icon;
+      background-image: url("./../../images/legal.svg");
+    }
+
+    .storage-container {
+      flex-grow: 1;
+      position: absolute;
+      bottom: 0px;
+      .left-panel-storage {
+        margin-bottom: 28px;
+        margin-left: 9px;
+        .storage {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 18px;
+          .storage-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15.9px;
+            .logo {
+              background-image: url("./../../images/cloud.svg");
+              width: 17.1px;
+              height: 14.4px;
+              background-size: 17.1px 14.4px;
+            }
+            & > p {
+              font-size: 14px;
+            }
+          }
+          .storage-percent-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            height: 20px;
+            background-color: #eceff6;
+            & > div {
+              font-size: 10px;
+              color: #767676;
+              letter-spacing: 0.3px;
+              line-height: 1.2;
+              font-weight: 600;
+            }
+          }
+        }
+        .storage-bar {
+          width: 198px;
+          height: 4px;
+          border-radius: 6px;
+          background-color: #e5e5e5;
+          margin-bottom: 10px;
+          .full-spaces {
+            width: 35px;
+            height: 4px;
+            border-radius: 6px;
+            background-color: #6099d2;
+          }
+        }
+        & > p {
+          margin-bottom: 10px;
+          font-size: 10px;
+          line-height: 1.2;
+          letter-spacing: 0.1px;
+          color: #767676;
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 767px) {
-    .leftPanel_container {
-        display: none;
-    }
+  .leftPanel-container {
+    display: none;
+  }
 }

@@ -2,10 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
-import App from "./App";
+import "bootstrap/dist/css/bootstrap.min.css";
+import App from "./app";
 import store from "./store";
 
-import "./App.css";
+import "./app.css";
 import "./css/global.scss";
 import "./css/media.scss";
 

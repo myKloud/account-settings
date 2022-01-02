@@ -1,48 +1,41 @@
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import http from "./http";
+import axios from "axios";
 
+const apiEndPoint_check = `/check`;
 const apiEndPoint_signup = `/signup`;
-const apiEndPoint_send_otp = `/`; // to do
-const apiEndPoint_check_user = `/`; // to do
+const apiEndPoint_send_otp = `/sendOTP`;
 
 export async function checkUser(username) {
-  const info = {
-    username: username,
-  };
-  return false;
-  debugger;
-  //   const { headers, data } = await http.post(apiEndPoint_check_user, info);
+  const param = `?username=${username}`;
+  const { data } = await http.get(`${apiEndPoint_check}${param}`);
+  return data;
 }
 
 export async function sendOtp(recovery) {
   const info = {
     value: recovery.value,
-    otp: recovery.otp,
+    otp: recovery.otp.toString(),
   };
-  await console.log(info);
-  return true;
-  //   const { headers, data } = await http.post(apiEndPoint_send_otp, info);
-  //   debugger;
-  //   return data;
+  const { data } = await http.post(apiEndPoint_send_otp, info);
+  return data;
 }
 
 export async function signUp(informations) {
+  const { username, firstName, lastName, password, recovery } = informations;
   const info = {
-    username: informations.username,
-    fistName: informations.firstName,
-    lastName: informations.lastName,
-    password: informations.password,
-    recovery: informations.recovery,
+    username,
+    firstName,
+    lastName,
+    password,
+    recovery,
   };
 
-  console.log(info);
-  await http.post(apiEndPoint_signup, info);
+  const { data } = await http.post(apiEndPoint_signup, info);
 
-  return true;
+  return data;
 }
 
-export default {
-  checkUser,
-  sendOtp,
-  signUp,
-};
+const service = { checkUser, sendOtp, signUp };
+
+export default service;

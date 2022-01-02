@@ -1,36 +1,49 @@
+.TopPanel-container {
+  display: flex;
+  justify-content: flex-end;
+  height: 66px;
+  padding-right: 40px;
+  background-color: rgba(100, 159, 219, 0.05);
+  column-gap: 25px;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 44px;
 
-.TopPanel-container{
-    display: flex;
-    justify-content: flex-end;
-    height: 66px;
-    padding-left: 40px;
-    padding-right: 40px;
-    background-color: rgba(100, 159, 219, 0.05);
-    column-gap: 25px;
-    width: 100%;
-    align-items: center;
-    margin-bottom: 42px;
-    .name-icon{
-        height: 40px;
-        width: 40px;
-        display: flex;
-        background-color: #dde7f0;
-        justify-content: center;
-        align-items: center;
-        border-radius: 25px;
-    }
-    .upgrage-button{
-        width: 95px;
-        height: 32px;
-        border-radius: 6px;
-        background-color: #649fdb;
-        color: white;
-        font-size: 12px;
-    }
-   
-}   
-@media only screen and (max-width: 767px) {
-    .TopPanel-container {
-      display: none !important;
-    }
+  %top-panel-icon {
+    width: 20px;
+    height: 20px;
+    background-size: 20px 20px;
+    cursor: pointer;
   }
+  .top-panel-icon-setting {
+    @extend %top-panel-icon;
+    background-image: url("../../images/topsetting.svg");
+  }
+  .top-panel-icon-help {
+    @extend %top-panel-icon;
+    background-image: url("../../images/topHelp.png");
+  }
+
+  .top-panel-name-icon {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    background-color: #dde7f0;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+  }
+  .upgrade-button {
+    width: 95px;
+    height: 32px;
+    border-radius: 6px;
+    background-color: #649fdb;
+    color: white;
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .TopPanel-container {
+    display: none !important;
+  }
+}

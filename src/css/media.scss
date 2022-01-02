@@ -24,12 +24,14 @@
     background-size: auto;
   }
 
-  .form_container {
+  .form-container {
     height: 100%;
     display: block !important;
+    // margin-left: 24px;
+    // margin-right: 24px;
     // min-height: 82vh !important;
 
-    .form_wrapper {
+    .form-wrapper {
       width: 100%;
       background-color: transparent;
       margin: auto;
@@ -37,12 +39,12 @@
       border: 0 none;
     }
 
-    .form_title {
+    .form-title {
       text-align: left;
       font-size: 20px;
     }
 
-    .form_field {
+    .form-field {
       font-family: "Open Sans" !important;
       font-size: 14px !important;
       font-weight: 600 !important;

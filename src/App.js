@@ -1,8 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
-import { getStorage } from "../src/config/storage";
-import LeftPanel from "./components/LeftPanel";
-import AccountSetting from "./components/Settings";
+import { getStorage } from "./config/storage";
+import AccountSetting from "./components/accountSetting";
 
 function App() {
   const history = useHistory();
@@ -11,7 +10,7 @@ function App() {
   const pathChecker = () => {
     if (storage === null || !storage.isvalid) {
       history.push({
-        pathname: "/",
+        pathname: "/accountSettings",
       });
     } else {
       history.push({
@@ -24,7 +23,11 @@ function App() {
   return (
     <>
       <Switch>
-        <Route exact path="/" render={() => <AccountSetting />} />
+        <Route
+          exact
+          path="/accountSettings"
+          render={() => <AccountSetting />}
+        />
       </Switch>
     </>
   );
