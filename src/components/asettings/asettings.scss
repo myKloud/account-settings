@@ -1,0 +1,100 @@
+@import "../../css/variables.scss";
+
+.main-settings {
+  @media only screen and (max-width: 767px) {
+    .left-panel-storage {
+      display: none;
+    }
+    .Back-to-menu {
+      display: none !important;
+    }
+    .mykloud-logo {
+      display: none !important;
+    }
+    .right-panel-container {
+      display: none;
+    }
+    .leftPanel-container {
+      width: 100%;
+      display: block;
+      padding-left: 0px;
+      margin-right: 24px;
+      margin-left: 24px;
+      box-shadow: none;
+    }
+    .leftPanel-container {
+      .leftPanel-button {
+        width: 100%;
+        height: 50px;
+        padding-left: 16px;
+        margin-left: 0;
+        border: solid 0.1px #b4b9bb;
+        border-radius: 6px;
+        background-color: #f1f6fa;
+      }
+      .left-panel-icon-kmailSetting,
+      .left-panel-icon-accountSetting,
+      .left-panel-icon-help,
+      .left-panel-icon-legal {
+        width: 22px;
+        height: 22px;
+        background-size: 22px 22px;
+      }
+      .leftPanel-text {
+        font-size: 14px;
+        color: black;
+      }
+    }
+  }
+}
+
+.main-settings {
+  .nav-fixed {
+    .settings-bar {
+      display: flex;
+      justify-content: space-between;
+    }
+    .setting-dotes {
+      margin-right: 26px;
+      display: none;
+      width: 14px;
+      height: 14px;
+      background-size: 14px 14px;
+      background-image: url("../../images/x.png");
+      align-self: center;
+      cursor: pointer;
+    }
+    .mobile-response {
+      font-weight: 500;
+      font-size: 20px;
+    }
+  }
+  .logo-mobile {
+    display: none;
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    background-image: url("./../../images/app-logo.png");
+  }
+
+  @media only screen and (max-width: 767px) {
+    .setting-dotes {
+      display: inline !important;
+    }
+    .logo-mobile {
+      display: inline;
+    }
+    .mobile-response {
+      display: none;
+    }
+
+    .settings-bar {
+      margin-left: 24px;
+    }
+    .nav-fixed {
+      left: 0px;
+      width: 100%;
+      margin-top: 68px;
+    }
+  }
+}

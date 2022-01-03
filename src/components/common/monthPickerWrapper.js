@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { MonthPicker } from "react-dropdown-date";
 
 const MonthPickerWrapper = (props) => {
-  const [has_value, set_value] = useState(false);
+  const [has_value, setValue] = useState(false);
 
   const setValueHandler = (month) => {
-    if (month) set_value(true);
-    else set_value(false);
+    if (month) setValue(true);
+    else setValue(false);
 
     props.onChange(month);
   };
@@ -19,7 +19,7 @@ const MonthPickerWrapper = (props) => {
         }`}
       >
         <MonthPicker
-          classes={`select-months form_field ${
+          classes={`select-months form-field ${
             props.className ? props.className : ""
           }`}
           caps
@@ -27,7 +27,7 @@ const MonthPickerWrapper = (props) => {
           disabled={props.disabled || false}
           onChange={(month) => setValueHandler(month)}
         />
-        <label className={`form_label ${has_value ? "filled" : ""}`}>
+        <label className={`form-label ${has_value ? "filled" : ""}`}>
           {props.placeholder}
         </label>
       </div>

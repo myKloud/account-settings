@@ -2,10 +2,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-
 axios.interceptors.request.use(
   function (config) {
-    // Do something before request is sent
+    config.headers = {
+      Authorization: "Basic YWRtaW46RG9udEdpdmVVcA==",
+    };
 
     config.timeout = 35000;
     return config;
@@ -50,11 +51,12 @@ axios.interceptors.response.use(null, (error) => {
 
   return Promise.reject(error);
 });
-
-export default {
+const method = {
   get: axios.get,
   post: axios.post,
   put: axios.put,
   delete: axios.delete,
   CancelToken: axios.CancelToken,
 };
+
+export default method;
