@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 
 const Input = (props) => {
-  console.log("props", props);
-  const [has_value, set_value] = useState(false);
+  const [hasValue, setValue] = useState(false);
 
   const setValueHandler = (e) => {
-    if (e.target.value) set_value(true);
-    else set_value(false);
+    if (e.target.value) setValue(true);
+    else setValue(false);
     props.onChange(e.target.value);
   };
 
@@ -19,7 +18,7 @@ const Input = (props) => {
       >
         <input
           type={props.type}
-          className={`form_field ${props.className ? props.className : ""}`}
+          className={`form-field ${props.className ? props.className : ""}`}
           autoFocus={props.autoFocus || false}
           value={props.value}
           onChange={(e) => {
@@ -31,7 +30,7 @@ const Input = (props) => {
         />
 
         <label
-          className={`form_label ${has_value || props.value ? "filled" : ""} `}
+          className={`form-label ${hasValue || props.value ? "filled" : ""} `}
         >
           {props.placeholder}
         </label>
