@@ -7,6 +7,7 @@ import NavBar from "../navBar";
 import "./settings.scss";
 import MyKloudAccount from "../myKloudAccount";
 import { useHistory } from "react-router-dom";
+
 const Settings = (props) => {
   const history = useHistory();
 
