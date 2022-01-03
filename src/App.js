@@ -1,6 +1,6 @@
 import { Route, Switch, Redirect } from "react-router-dom";
 import AccountSetting from "./components/accountSetting";
-import Settings from "./components/settings/aSettings";
+import Settings from "./components/settings";
 
 function App() {
   return (
