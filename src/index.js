@@ -3,10 +3,10 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import App from "./app";
+import App from "./App";
 import store from "./store";
 
-import "./app.css";
+import "./App.css";
 import "./css/global.scss";
 import "./css/media.scss";
 

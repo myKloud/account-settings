@@ -13,7 +13,7 @@ import {
 import { sendOtp } from "../../services/register";
 import { Button, Modal } from "react-bootstrap";
 import Validation from "../common/validation";
-import { changeRecovery } from "./../../services/accountSetting";
+import { changeRecovery } from "../../services/accountSetting";
 
 let interval;
 
@@ -68,14 +68,10 @@ const CodeVerification = (props) => {
     }
   };
 
-  //
-
   useEffect(() => {
     const lang = props.languageReducer.lang;
     Localization.setLanguage(lang);
   }, [props.languageReducer.lang, userObj.recovery]);
-
-  //
 
   useEffect(() => {
     if (reduxMin !== 0) {
@@ -156,7 +152,7 @@ const CodeVerification = (props) => {
     }
 
     // TODO
-    if (otp.otp == code) {
+    if (otp.otp === code) {
       const information = {
         username: "yash@mykmail.io",
         recovery: props.email ? props.email : props.number,

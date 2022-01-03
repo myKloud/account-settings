@@ -1,5 +1,5 @@
 import React from "react";
-import AccountSettingProfile from "./myKloudAccountProfile";
+import AccountSettingProfile from "./MyKloudAccountProfile";
 const Index = (props) => {
   return (
     <>

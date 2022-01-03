@@ -1,5 +1,5 @@
 import React from "react";
-import TopPanel from "./topPanel";
+import TopPanel from "./TopPanel";
 
 const Index = (props) => {
   return (

@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import AccountSetting from "./components/accountSetting";
 import Settings from "./components/settings";
 
@@ -8,6 +8,9 @@ function App() {
       <Switch>
         <Route path="/accountSettings" render={() => <AccountSetting />} />
         <Route path="/settings" render={() => <Settings />} />
+        <Route exact path="/">
+          <Redirect to="/accountSettings" />
+        </Route>
       </Switch>
     </>
   );

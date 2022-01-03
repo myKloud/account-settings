@@ -1,5 +1,5 @@
 import React from "react";
-import MyKloudAccountPassword from "./myKloudAccountPassword";
+import MyKloudAccountPassword from "./MyKloudAccountPassword";
 
 const Index = () => {
   return (
