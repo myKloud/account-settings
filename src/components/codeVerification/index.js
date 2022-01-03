@@ -1,5 +1,5 @@
 import React from "react";
-import CodeVerification from "./codeVerification";
+import CodeVerification from "./CodeVerification";
 const Index = () => {
   return (
     <>

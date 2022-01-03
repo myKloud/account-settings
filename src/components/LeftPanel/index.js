@@ -1,5 +1,5 @@
 import React from "react";
-import LeftPanel from "./leftPanel";
+import LeftPanel from "./LeftPanel";
 
 const Index = () => {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import AccountSetting from "./accountSetting";
+import AccountSetting from "./AccountSetting";
 const Index = () => {
   return (
     <>

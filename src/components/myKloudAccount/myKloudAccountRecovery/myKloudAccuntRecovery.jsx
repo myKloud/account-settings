@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import Localization from "./../localization";
+import Localization from "../localization";
 
 import blackEmailImg from "../../../images/blackEmail.png";
 import whiteEmailImg from "../../../images/whiteEmail.png";
@@ -20,7 +20,7 @@ import "./myKloudAccountRecovery.scss";
 
 // Component
 import Input from "../../common/input";
-import formValidation from "./../formValidation";
+import formValidation from "../formValidation";
 let interval;
 
 const MyKloudAccountRecovery = (props) => {
@@ -114,7 +114,7 @@ const MyKloudAccountRecovery = (props) => {
     let isValid = true;
     const domain = ["mykmail.io", "mykloudmail.io", "mkmail.io"];
 
-    if (input.name == "email") {
+    if (input.name === "email") {
       setEmailMessage("");
 
       if (!value.length) {
@@ -131,7 +131,7 @@ const MyKloudAccountRecovery = (props) => {
       }
     }
 
-    if (input.name == "number") {
+    if (input.name === "number") {
       setNumberMessage("");
 
       if (!value.length) {
@@ -164,8 +164,6 @@ const MyKloudAccountRecovery = (props) => {
       await setUserObj(userObj);
       setStorage("verification");
 
-      let send = false;
-
       if (getResend()) {
         if (getResend() === "second") {
           setResend("third");
@@ -176,17 +174,19 @@ const MyKloudAccountRecovery = (props) => {
         setResend("first");
       }
 
-      // if (send) {
-      setRecovery([method === "email" ? email : `+${number}`, method]);
-      history.push({
-        pathname: "/accountSettings",
-        state: {
-          value: method === "email" ? email : `+${number}`,
-          method: method,
-        },
-      });
-      setShowCode(true);
-      // }
+      // TODO: to let send variable dynamic
+      let send = true;
+      if (send) {
+        setRecovery([method === "email" ? email : `+${number}`, method]);
+        history.push({
+          pathname: "/accountSettings",
+          state: {
+            value: method === "email" ? email : `+${number}`,
+            method: method,
+          },
+        });
+        setShowCode(true);
+      }
     }
   };
   useEffect(() => {

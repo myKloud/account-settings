@@ -1,6 +1,5 @@
 // import { toast } from "react-toastify";
 import http from "./http";
-import axios from "axios";
 
 const apiEndPoint_check = `/check`;
 const apiEndPoint_signup = `/signup`;
