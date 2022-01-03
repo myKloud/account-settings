@@ -27,8 +27,8 @@ const CodeVerification = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const fifteenMinute = 15;
-  const fiftyNineSec = 59;
+  const initialMinute = 15;
+  const initialSeconds = 59;
 
   const formValidation = {
     resend: {
@@ -58,11 +58,11 @@ const CodeVerification = (props) => {
       setSeconds(0);
     } else if (getResend() === "second") {
       setResend("third");
-      setMin(fifteenMinute);
+      setMin(initialMinute);
       setSeconds(0);
       setError(() => formValidation.resend.wait);
     } else if (getResend() === "third") {
-      setMin(fifteenMinute);
+      setMin(initialMinute);
       setSeconds(0);
       setError(() => formValidation.resend.wait);
     }
@@ -95,7 +95,7 @@ const CodeVerification = (props) => {
     }
 
     if (getResend() === "third" && reduxMin === 0 && reduxSeconds === 0) {
-      setMin(fifteenMinute);
+      setMin(initialMinute);
       setSeconds(0);
       setError(() => formValidation.resend.wait);
     }
@@ -109,7 +109,7 @@ const CodeVerification = (props) => {
   useEffect(() => {
     if (seconds < 0 && min > 0) {
       setMin((min) => min - 1);
-      setSeconds(fiftyNineSec);
+      setSeconds(initialSeconds);
     }
 
     if (seconds === 0 && min === 0 && isTimer) {
