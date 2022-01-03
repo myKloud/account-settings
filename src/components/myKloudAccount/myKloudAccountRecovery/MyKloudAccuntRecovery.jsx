@@ -12,7 +12,7 @@ import { setUserObj } from "../../../actions/userAction";
 import { setOTP } from "../../../actions/otpAction";
 import { setStorage, getResend, setResend } from "../../../config/storage";
 import { generateOTP } from "../../../config/util";
-import Verification from "../../codeVerification";
+import Verification from "../../codeVerification/CodeVerification";
 import ReactPhoneInput from "react-phone-input-2";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import "react-phone-input-2/lib/style.css";
@@ -160,6 +160,7 @@ const MyKloudAccountRecovery = (props) => {
       userObj.recovery = method === "email" ? email : number;
 
       const otp = generateOTP();
+      console.log("otp", otp);
       props.dispatch(setOTP(otp));
       await setUserObj(userObj);
       setStorage("verification");

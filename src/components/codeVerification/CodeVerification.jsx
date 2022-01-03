@@ -150,20 +150,15 @@ const CodeVerification = (props) => {
     if (props.resetPass) {
       props.setStage("reset");
     }
-
     // TODO
-    if (otp.otp === code) {
+    if (otp.otp.toString() === code) {
       const information = {
         username: "yash@mykmail.io",
         recovery: props.email ? props.email : props.number,
       };
       changeRecovery(information);
 
-      handleShow()
-        .then((res) => {})
-        .catch((err) => {
-          console.log("err");
-        });
+      handleShow();
     } else {
       setVerifyError("Incorrect code, try again.");
     }
