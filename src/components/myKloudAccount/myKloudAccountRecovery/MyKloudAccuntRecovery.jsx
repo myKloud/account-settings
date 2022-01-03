@@ -44,6 +44,8 @@ const MyKloudAccountRecovery = (props) => {
 
   let reduxMin = userObj.min;
   let reduxSeconds = userObj.seconds;
+  const initialMinute = 15;
+  const initialSeconds = 59;
 
   useEffect(() => {
     const lang = props.languageReducer.lang;
@@ -71,7 +73,7 @@ const MyKloudAccountRecovery = (props) => {
       }
     } else {
       if (resendStorage === "third" && reduxMin === 0 && reduxSeconds === 0) {
-        setMin(15);
+        setMin(initialMinute);
         setSeconds(0);
       }
     }
@@ -85,7 +87,7 @@ const MyKloudAccountRecovery = (props) => {
   useEffect(() => {
     if (seconds < 0 && min > 0) {
       setMin((min) => min - 1);
-      setSeconds(59);
+      setSeconds(initialSeconds);
     }
     if (seconds === 0 && min === 0 && isTimer) {
       clearInterval(interval);
@@ -160,7 +162,6 @@ const MyKloudAccountRecovery = (props) => {
       userObj.recovery = method === "email" ? email : number;
 
       const otp = generateOTP();
-      console.log("otp", otp);
       props.dispatch(setOTP(otp));
       await setUserObj(userObj);
       setStorage("verification");
