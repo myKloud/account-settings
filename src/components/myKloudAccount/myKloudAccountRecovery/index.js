@@ -1,5 +1,5 @@
 import React from "react";
-import MyKloudAccountRecovery from "./myKloudAccuntRecovery";
+import MyKloudAccountRecovery from "./MyKloudAccuntRecovery";
 
 const Index = () => {
   return (

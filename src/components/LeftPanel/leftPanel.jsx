@@ -28,7 +28,7 @@ const LeftPanel = (props) => {
             </div>
             <div
               className={`${
-                visited == "kmailSettings" ? "activeButton" : ""
+                visited === "kmailSettings" ? "activeButton" : ""
               } leftPanel-button`}
               onClick={() => {
                 visitedButton("kmailSettings");
@@ -64,7 +64,7 @@ const LeftPanel = (props) => {
             </div>
             <div
               className={`${
-                visited == "help" ? "activeButton" : ""
+                visited === "help" ? "activeButton" : ""
               } leftPanel-button`}
               onClick={() => {
                 visitedButton("help");
@@ -82,7 +82,7 @@ const LeftPanel = (props) => {
             </div>
             <div
               className={`${
-                visited == "legal" ? "activeButton" : ""
+                visited === "legal" ? "activeButton" : ""
               } leftPanel-button`}
               onClick={() => {
                 visitedButton("legal");

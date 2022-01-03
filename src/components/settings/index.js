@@ -1,9 +1,9 @@
 import React from "react";
-import Recovery from ".";
+import Settings from "./settings";
 const Index = () => {
   return (
     <>
-      <Recovery />
+      <Settings />
     </>
   );
 };

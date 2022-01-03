@@ -4,7 +4,7 @@ import Localization from "./localization";
 import LeftPanel from "../leftPanel";
 import TopPanel from "../topPanel";
 import NavBar from "../navBar";
-import "./asettings.scss";
+import "./settings.scss";
 import MyKloudAccount from "../myKloudAccount";
 import { useHistory } from "react-router-dom";
 const Settings = (props) => {

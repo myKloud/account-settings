@@ -1,8 +1,6 @@
-import { useHistory } from "react-router-dom";
-import { Route, Switch } from "react-router-dom";
-import { getStorage } from "./config/storage";
+import { Route, Switch, Redirect } from "react-router-dom";
 import AccountSetting from "./components/accountSetting";
-import Settings from "./components/asettings";
+import Settings from "./components/settings/Settings";
 
 function App() {
   return (
@@ -10,6 +8,9 @@ function App() {
       <Switch>
         <Route path="/accountSettings" render={() => <AccountSetting />} />
         <Route path="/settings" render={() => <Settings />} />
+        <Route exact path="/">
+          <Redirect to="/accountSettings" />
+        </Route>
       </Switch>
     </>
   );
