@@ -6,7 +6,7 @@ import Validation from "../../common/validation";
 import formValidation from "../formValidation";
 import { changePassword } from "../../../services/accountSetting";
 import validate from "../validate";
-import "./style.scss";
+import "./myKloudAccountPassword.scss";
 
 const MyKloudAccountPassword = () => {
   const [showPasswordDetails, setShowPasswordDetails] = useState(false);

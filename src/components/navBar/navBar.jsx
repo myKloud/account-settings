@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Localization from "./localization";
 import { useHistory } from "react-router-dom";
@@ -7,8 +7,10 @@ import "./style.scss";
 const NavBar = (props) => {
   console.log("props", props);
   const history = useHistory();
-  const { lang } = props.languageReducer;
-  Localization.setLanguage(lang);
+  useEffect(() => {
+    const lang = props.languageReducer.lang;
+    Localization.setLanguage(lang);
+  }, [props.languageReducer.lang]);
 
   return (
     <div className="nav-fixed">

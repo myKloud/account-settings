@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import Localization from "./../localization";
 
-import blackEmailImg from "../../../images/email1.png";
-import whiteEmailImg from "../../../images/email2.png";
-import blackPhoneImg from "../../../images/phone1.png";
-import whitePhoneImg from "../../../images/phone2.png";
+import blackEmailImg from "../../../images/blackEmail.png";
+import whiteEmailImg from "../../../images/whiteEmail.png";
+import blackPhoneImg from "../../../images/blackPhone.png";
+import whitePhoneImg from "../../../images/whitePhone.png";
 import Validation from "../../common/validation";
 import { setUserObj } from "../../../actions/userAction";
 import { setOTP } from "../../../actions/otpAction";
@@ -16,7 +16,7 @@ import Verification from "../../codeVerification";
 import ReactPhoneInput from "react-phone-input-2";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import "react-phone-input-2/lib/style.css";
-import "./style.scss";
+import "./myKloudAccountRecovery.scss";
 
 // Component
 import Input from "../../common/input";
@@ -189,8 +189,10 @@ const MyKloudAccountRecovery = (props) => {
       // }
     }
   };
-  const { lang } = props.languageReducer;
-  Localization.setLanguage(lang);
+  useEffect(() => {
+    const lang = props.languageReducer.lang;
+    Localization.setLanguage(lang);
+  }, [props.languageReducer.lang]);
 
   return (
     <>
@@ -362,7 +364,7 @@ const MyKloudAccountRecovery = (props) => {
           <div className="payment-icon"></div>
 
           <div>Payment</div>
-        </div>{" "}
+        </div>
       </div>
     </>
   );

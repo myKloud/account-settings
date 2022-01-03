@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Localization from "./localization";
-import "./style.scss";
+import "./leftPanel.scss";
 
 const LeftPanel = (props) => {
-  const { lang } = props.languageReducer;
   const [visited, setVisited] = useState("accountSettings");
 
   const visitedButton = (button) => {
     setVisited(button);
   };
 
-  Localization.setLanguage(lang);
+  useEffect(() => {
+    const lang = props.languageReducer.lang;
+    Localization.setLanguage(lang);
+  }, [props.languageReducer.lang]);
 
   return (
     <>

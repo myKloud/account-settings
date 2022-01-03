@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Localization from "./localization";
 import LeftPanel from "../leftPanel";
 import TopPanel from "../topPanel";
 import NavBar from "../navBar";
 
-import "./style.scss";
+import "./accountSetting.scss";
 import MyKloudAccount from "../myKloudAccount";
 
 const AccountSetting = (props) => {
   const [show, setShow] = useState(false);
 
-  const { lang } = props.languageReducer;
-  Localization.setLanguage(lang);
+  useEffect(() => {
+    const lang = props.languageReducer.lang;
+    Localization.setLanguage(lang);
+  }, [props.languageReducer.lang]);
 
   return (
     <>

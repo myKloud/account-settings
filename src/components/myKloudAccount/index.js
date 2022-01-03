@@ -1,4 +1,4 @@
-import "./style.scss";
+import "./myKloudAccount.scss";
 
 // Component
 import AccountSettingProfile from "./myKloudAccountProfile";

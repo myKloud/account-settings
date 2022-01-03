@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Localization from "../localization";
 import formValidation from "../formValidation";
@@ -47,8 +47,10 @@ const AccountSettingProfile = (props) => {
     }
   };
 
-  const { lang } = props.languageReducer;
-  Localization.setLanguage(lang);
+  useEffect(() => {
+    const lang = props.languageReducer.lang;
+    Localization.setLanguage(lang);
+  }, [props.languageReducer.lang]);
 
   return (
     <div className="bxo-container">

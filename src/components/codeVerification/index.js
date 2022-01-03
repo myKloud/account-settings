@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import VerificationInput from "../common/verificationInput";
 import { useHistory } from "react-router-dom";
-import "./style.scss";
+import "./codeVerification.scss";
 import Localization from "./localization";
 import {
   removeStorage,
@@ -14,9 +14,9 @@ import { sendOtp } from "../../services/register";
 import { Button, Modal } from "react-bootstrap";
 import Validation from "../common/validation";
 import { changeRecovery } from "./../../services/accountSetting";
-//
+
 let interval;
-//
+
 const CodeVerification = (props) => {
   const recovery = props.recovery || "01012345678";
   const recoveryObj = { value: recovery[0], method: recovery[1] };
@@ -27,12 +27,16 @@ const CodeVerification = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const fifteenMinute = 15;
+  const fiftyNineSec = 59;
+
   const formValidation = {
     resend: {
       name: "resend",
       wait: Localization.validation.resend.wait,
     },
   };
+
   const [error, setError] = useState(() => formValidation.resend.wait);
   const [verifyError, setVerifyError] = useState("");
   const userObj = props.userReducer;
@@ -47,10 +51,6 @@ const CodeVerification = (props) => {
       value: recoveryObj.value,
       otp: otp.otp,
     });
-    // interval = setInterval(() => {
-    //   setIsTimer(true);
-    //   setSeconds((seconds) => seconds - 1);
-    // }, 1000);
 
     if (getResend() === "first") {
       setResend("second");
@@ -58,11 +58,11 @@ const CodeVerification = (props) => {
       setSeconds(0);
     } else if (getResend() === "second") {
       setResend("third");
-      setMin(15);
+      setMin(fifteenMinute);
       setSeconds(0);
       setError(() => formValidation.resend.wait);
     } else if (getResend() === "third") {
-      setMin(15);
+      setMin(fifteenMinute);
       setSeconds(0);
       setError(() => formValidation.resend.wait);
     }
@@ -95,7 +95,7 @@ const CodeVerification = (props) => {
     }
 
     if (getResend() === "third" && reduxMin === 0 && reduxSeconds === 0) {
-      setMin(15);
+      setMin(fifteenMinute);
       setSeconds(0);
       setError(() => formValidation.resend.wait);
     }
@@ -109,7 +109,7 @@ const CodeVerification = (props) => {
   useEffect(() => {
     if (seconds < 0 && min > 0) {
       setMin((min) => min - 1);
-      setSeconds(59);
+      setSeconds(fiftyNineSec);
     }
 
     if (seconds === 0 && min === 0 && isTimer) {
@@ -140,10 +140,6 @@ const CodeVerification = (props) => {
       props.setPre(!props.pre);
       history.push({
         pathname: "/accountSettings",
-        // state: {
-        //   min: min,
-        //   seconds: seconds,
-        // },
       });
     }
   };
@@ -165,7 +161,6 @@ const CodeVerification = (props) => {
         username: "yash@mykmail.io",
         recovery: props.email ? props.email : props.number,
       };
-      // sed it to back end
       changeRecovery(information);
 
       handleShow()

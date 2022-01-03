@@ -15,7 +15,7 @@ import Localization from "./localization";
 import { setStorage } from "../../config/storage";
 import { generateOTP } from "../../config/util";
 import { isValidPhoneNumber } from "react-phone-number-input";
-import "./style.scss";
+import "./recovery.scss";
 import { sendOtp } from "../../services/register";
 
 const Recovery = (props) => {
