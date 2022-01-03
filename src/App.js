@@ -1,8 +1,6 @@
-import { useHistory } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
-import { getStorage } from "./config/storage";
 import AccountSetting from "./components/accountSetting";
-import Settings from "./components/asettings";
+import Settings from "./components/settings/settings";
 
 function App() {
   return (
