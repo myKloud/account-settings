@@ -10,7 +10,7 @@ import {
   getResend,
   setResend,
 } from "../../config/storage";
-import { sendOtp } from "../../services/register";
+import { sendOtp, verifyOtp } from "../../services/register";
 import { Button, Modal } from "react-bootstrap";
 import Validation from "../common/validation";
 import { changeRecovery } from "../../services/accountSetting";
@@ -46,7 +46,12 @@ const CodeVerification = (props) => {
   let reduxMin = userObj.min;
   let reduxSeconds = userObj.seconds;
 
-  const resendCode = () => {
+  const resendCode = async () => {
+    await sendOtp({
+      value: props.method !== "phone" ? props.email : `+${props.number}`,
+      type: props.method !== "phone" ? 0 : 1,
+    });
+
     sendOtp({
       value: recoveryObj.value,
       otp: otp.otp,
@@ -140,7 +145,14 @@ const CodeVerification = (props) => {
     }
   };
 
-  const verifyCode = () => {
+  const verify = async (recovery, code) => {
+    const response = await verifyOtp({ value: recovery, otp: code });
+    return response;
+  };
+
+  const verifyCode = async () => {
+    let check = await verify(userObj.recovery, code);
+
     removeStorage();
     if (props.push) {
       history.push({
@@ -150,14 +162,14 @@ const CodeVerification = (props) => {
     if (props.resetPass) {
       props.setStage("reset");
     }
+
     // TODO
-    if (otp.otp.toString() === code) {
+    if (check === "Valid OTP") {
       const information = {
         username: "yash@mykmail.io",
         recovery: props.email ? props.email : props.number,
       };
       changeRecovery(information);
-
       handleShow();
     } else {
       setVerifyError("Incorrect code, try again.");

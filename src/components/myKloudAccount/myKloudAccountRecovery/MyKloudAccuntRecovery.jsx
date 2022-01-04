@@ -8,10 +8,8 @@ import whiteEmailImg from "../../../images/whiteEmail.png";
 import blackPhoneImg from "../../../images/blackPhone.png";
 import whitePhoneImg from "../../../images/whitePhone.png";
 import Validation from "../../common/validation";
-import { setUserObj } from "../../../actions/userAction";
-import { setOTP } from "../../../actions/otpAction";
-import { setStorage, getResend, setResend } from "../../../config/storage";
-import { generateOTP } from "../../../config/util";
+import { sendOtp } from "../../../services/register";
+import { getResend, setResend } from "../../../config/storage";
 import Verification from "../../codeVerification/CodeVerification";
 import ReactPhoneInput from "react-phone-input-2";
 import { isValidPhoneNumber } from "react-phone-number-input";
@@ -161,11 +159,6 @@ const MyKloudAccountRecovery = (props) => {
       userObj.method = method;
       userObj.recovery = method === "email" ? email : number;
 
-      const otp = generateOTP();
-      props.dispatch(setOTP(otp));
-      await setUserObj(userObj);
-      setStorage("verification");
-
       if (getResend()) {
         if (getResend() === "second") {
           setResend("third");
@@ -177,7 +170,13 @@ const MyKloudAccountRecovery = (props) => {
       }
 
       // TODO: to let send variable dynamic
-      let send = true;
+
+      let send = false;
+      send = await sendOtp({
+        value: method !== "phone" ? email : `+${number}`,
+        type: method !== "phone" ? 0 : 1,
+      });
+
       if (send) {
         setRecovery([method === "email" ? email : `+${number}`, method]);
         history.push({
@@ -345,6 +344,7 @@ const MyKloudAccountRecovery = (props) => {
               setPre={setPre}
               email={email}
               number={number}
+              method={method}
             />
           )}
         </div>

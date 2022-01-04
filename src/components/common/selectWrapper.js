@@ -19,7 +19,6 @@ const SelectWrapper = (props) => {
       >
         <Select
           defaultValue={props.value}
-          // value={props.value}
           className={`${props.className ? props.className : ""}`}
           onChange={(e) => {
             setValueHandler(e);

@@ -1,9 +1,9 @@
-// import { toast } from "react-toastify";
-import http from "./http";
+import http from "./httpOtp";
 
 const apiEndPoint_check = `/check`;
 const apiEndPoint_signup = `/signup`;
-const apiEndPoint_send_otp = `/sendOTP`;
+const apiEndPointSendOtp = `/otp`;
+const apiEndPointVerifyOtp = `/verifyOtp`;
 
 export async function checkUser(username) {
   const param = `?username=${username}`;
@@ -13,11 +13,16 @@ export async function checkUser(username) {
 
 export async function sendOtp(recovery) {
   const info = {
-    value: recovery.value,
-    otp: recovery.otp.toString(),
+    recovery: recovery.value,
+    recoveryType: recovery.type,
   };
-  const { data } = await http.post(apiEndPoint_send_otp, info);
+  const { data } = await http.post(apiEndPointSendOtp, info);
   return data;
+}
+export async function verifyOtp(recovery) {
+  const param = `?recovery=${recovery.value}&code=${recovery.otp}`;
+  const { data } = await http.get(`${apiEndPointVerifyOtp}${param}`);
+  return data.message;
 }
 
 export async function signUp(informations) {
