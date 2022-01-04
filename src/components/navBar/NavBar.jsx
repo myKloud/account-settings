@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import "./style.scss";
 
 const NavBar = (props) => {
-  console.log("props", props);
   const history = useHistory();
   useEffect(() => {
     const lang = props.languageReducer.lang;

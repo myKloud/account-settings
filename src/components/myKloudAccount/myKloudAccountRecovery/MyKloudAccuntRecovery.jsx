@@ -8,11 +8,9 @@ import whiteEmailImg from "../../../images/whiteEmail.png";
 import blackPhoneImg from "../../../images/blackPhone.png";
 import whitePhoneImg from "../../../images/whitePhone.png";
 import Validation from "../../common/validation";
-import { setUserObj } from "../../../actions/userAction";
-import { setOTP } from "../../../actions/otpAction";
-import { setStorage, getResend, setResend } from "../../../config/storage";
-import { generateOTP } from "../../../config/util";
-import Verification from "../../codeVerification";
+import { sendOtp } from "../../../services/register";
+import { getResend, setResend } from "../../../config/storage";
+import Verification from "../../codeVerification/CodeVerification";
 import ReactPhoneInput from "react-phone-input-2";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import "react-phone-input-2/lib/style.css";
@@ -44,6 +42,8 @@ const MyKloudAccountRecovery = (props) => {
 
   let reduxMin = userObj.min;
   let reduxSeconds = userObj.seconds;
+  const initialMinute = 15;
+  const initialSeconds = 59;
 
   useEffect(() => {
     const lang = props.languageReducer.lang;
@@ -71,7 +71,7 @@ const MyKloudAccountRecovery = (props) => {
       }
     } else {
       if (resendStorage === "third" && reduxMin === 0 && reduxSeconds === 0) {
-        setMin(15);
+        setMin(initialMinute);
         setSeconds(0);
       }
     }
@@ -85,7 +85,7 @@ const MyKloudAccountRecovery = (props) => {
   useEffect(() => {
     if (seconds < 0 && min > 0) {
       setMin((min) => min - 1);
-      setSeconds(59);
+      setSeconds(initialSeconds);
     }
     if (seconds === 0 && min === 0 && isTimer) {
       clearInterval(interval);
@@ -159,11 +159,6 @@ const MyKloudAccountRecovery = (props) => {
       userObj.method = method;
       userObj.recovery = method === "email" ? email : number;
 
-      const otp = generateOTP();
-      props.dispatch(setOTP(otp));
-      await setUserObj(userObj);
-      setStorage("verification");
-
       if (getResend()) {
         if (getResend() === "second") {
           setResend("third");
@@ -175,7 +170,13 @@ const MyKloudAccountRecovery = (props) => {
       }
 
       // TODO: to let send variable dynamic
-      let send = true;
+
+      let send = false;
+      send = await sendOtp({
+        value: method !== "phone" ? email : `+${number}`,
+        type: method !== "phone" ? 0 : 1,
+      });
+
       if (send) {
         setRecovery([method === "email" ? email : `+${number}`, method]);
         history.push({
@@ -343,6 +344,7 @@ const MyKloudAccountRecovery = (props) => {
               setPre={setPre}
               email={email}
               number={number}
+              method={method}
             />
           )}
         </div>
