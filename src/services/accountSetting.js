@@ -1,6 +1,6 @@
 import http from "./http";
 const apiEndPointUser = `/user`;
-const apiEndPointPassword = `/user`;
+const apiEndPointPassword = `/password`;
 
 export async function getUserInformation(username) {
   const param = `?username=${username}`;
