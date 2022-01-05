@@ -17,7 +17,9 @@ const Localization = new LocalizedStrings({
     confirm_passowrd_placeholder: "Confirm Password",
     save: "Save",
     msg: "Safe & secure via myKloud.",
-
+    oldPassword: {
+      incorrect: "You'r Password is incorrect",
+    },
     profileDetails: {
       firstName: "FirstName",
       lastName: "LirstName",

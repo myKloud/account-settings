@@ -1,4 +1,4 @@
-import http from "./httpOtp";
+import http from "./http";
 
 const apiEndPoint_check = `/check`;
 const apiEndPoint_signup = `/signup`;
@@ -19,6 +19,7 @@ export async function sendOtp(recovery) {
   const { data } = await http.post(apiEndPointSendOtp, info);
   return data;
 }
+
 export async function verifyOtp(recovery) {
   const param = `?recovery=${recovery.value}&code=${recovery.otp}`;
   const { data } = await http.get(`${apiEndPointVerifyOtp}${param}`);

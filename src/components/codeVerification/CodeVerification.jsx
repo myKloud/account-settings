@@ -41,7 +41,6 @@ const CodeVerification = (props) => {
   const [verifyError, setVerifyError] = useState("");
   const userObj = props.userReducer;
   const otp = props.otpReducer;
-  //
   const [isTimer, setIsTimer] = useState(false);
   let reduxMin = userObj.min;
   let reduxSeconds = userObj.seconds;
