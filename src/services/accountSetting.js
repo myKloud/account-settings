@@ -1,10 +1,10 @@
 import http from "./http";
-const apiEndPointGetInformation = `/userAccount`;
-const apiEndPointEditAccount = `/editUserAccount`;
+const apiEndPointUser = `/user`;
+const apiEndPointPassword = `/user`;
 
 export async function getUserInformation(username) {
   const param = `?username=${username}`;
-  const { data } = await http.get(`${apiEndPointGetInformation}${param}`);
+  const { data } = await http.get(`${apiEndPointUser}${param}`);
   return data;
 }
 
@@ -15,17 +15,18 @@ export async function changeFirstOrLastName(information) {
     firstName,
     lastName,
   };
-  const { data } = await http.put(apiEndPointEditAccount, info);
+  const { data } = await http.put(apiEndPointUser, info);
   return data;
 }
 
 export async function changePassword(information) {
-  const { username, password } = information;
+  const { username, oldPassword, newPassword } = information;
   const info = {
     username,
-    password,
+    oldPassword,
+    newPassword,
   };
-  const { data } = await http.put(apiEndPointEditAccount, info);
+  const { data } = await http.put(apiEndPointPassword, info);
   return data;
 }
 
@@ -35,7 +36,7 @@ export async function changeRecovery(information) {
     username,
     recovery,
   };
-  const { data } = await http.put(apiEndPointEditAccount, info);
+  const { data } = await http.put(apiEndPointPassword, info);
   return data;
 }
 

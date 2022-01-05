@@ -60,11 +60,17 @@ const MyKloudAccountPassword = () => {
     if (isValid) {
       const information = {
         username: "yash@mykmail.io",
-        password: password,
+        oldPassword: currentPassword,
+        newPassword: password,
       };
       // API for Change Password
-      changePassword(information);
-      setSucceed("Change Success");
+      changePassword(information)
+        .then(() => {
+          setSucceed("Change Success");
+        })
+        .catch(() => {
+          setCurrentMassMessage(Localization.oldPassword.incorrect);
+        });
     }
   };
 
@@ -177,6 +183,7 @@ const MyKloudAccountPassword = () => {
               </button>
               {passConfirmMessage && <Validation error={passConfirmMessage} />}
             </div>
+            <p className="successProfileInfo">{succeed ? succeed : ""}</p>
             <div className="save-button-container">
               <button className="next" onClick={savePassword}>
                 {Localization.save}
@@ -184,7 +191,6 @@ const MyKloudAccountPassword = () => {
             </div>
           </div>
         </div>
-        {succeed}
       </div>
     </div>
   );

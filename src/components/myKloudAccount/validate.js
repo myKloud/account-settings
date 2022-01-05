@@ -51,7 +51,7 @@ const validate = (
     // if currentPassword !== password from database
     // isValid = false
     // setCurrentMassMessage("your password is not correct");
-    setCurrentMassMessage("need an api to git the current password");
+    // setCurrentMassMessage("need an api to git the current password");
   }
   if (input.name === "password") {
     setPassMessage("");
