@@ -46,8 +46,7 @@ const validate = (
       isValid = false;
     }
   }
-  if (input.name === "currentPassword") {
-  }
+
   if (input.name === "password") {
     setPassMessage("");
     if (!value.length) {
