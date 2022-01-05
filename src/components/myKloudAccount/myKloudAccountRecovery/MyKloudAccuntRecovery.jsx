@@ -102,8 +102,6 @@ const MyKloudAccountRecovery = (props) => {
     }
   }, [seconds]);
 
-  ///
-
   const handleSetMethod = (type) => {
     setNumberMessage("");
     setEmailMessage("");
