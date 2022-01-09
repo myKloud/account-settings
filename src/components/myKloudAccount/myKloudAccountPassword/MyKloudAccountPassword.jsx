@@ -105,7 +105,7 @@ const MyKloudAccountPassword = () => {
                 className={`extra-padding ${
                   currentMassMessage && "validation"
                 } ${!showCurrentPassword && "password-mask"}`}
-                placeholder="current Password"
+                placeholder="Current password"
               />
               <button
                 className="input_visibilty"
@@ -138,7 +138,7 @@ const MyKloudAccountPassword = () => {
                 className={`extra-padding ${passMessage && "validation"} ${
                   !showPassword && "password-mask"
                 }`}
-                placeholder="new Password"
+                placeholder="Enter new password"
               />
               <button
                 className="input_visibilty"
@@ -169,7 +169,7 @@ const MyKloudAccountPassword = () => {
                 className={`extra-padding ${
                   passConfirmMessage && "validation"
                 } ${!showConfirmPassword && "password-mask"}`}
-                placeholder="confirm new password"
+                placeholder="Confirm new password"
               />
               <button
                 className="input_visibilty"

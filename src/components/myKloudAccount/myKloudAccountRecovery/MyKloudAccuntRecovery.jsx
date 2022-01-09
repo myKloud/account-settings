@@ -305,6 +305,9 @@ const MyKloudAccountRecovery = (props) => {
                         />
 
                         {numberMessage && <Validation error={numberMessage} />}
+                        <p className="recoveryMessage">
+                          {Localization.recovery.receiveMessagePhone}
+                        </p>
                       </div>
                     </>
                   </>

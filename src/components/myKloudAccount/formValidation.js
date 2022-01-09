@@ -14,7 +14,7 @@ const formValidation = {
   },
   currentPassword: {
     name: "currentPassword",
-    required: Localization.validation.password.required,
+    required: Localization.validation.currentPassword.required,
     length: Localization.validation.password.length,
     pattern: Localization.validation.password.patteren,
   },

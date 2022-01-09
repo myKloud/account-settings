@@ -14,6 +14,7 @@
     .right-panel-container {
       display: none;
     }
+
     .leftPanel-container {
       width: 100%;
       display: block;
@@ -31,6 +32,21 @@
         border: solid 0.1px #b4b9bb;
         border-radius: 6px;
         background-color: #f1f6fa;
+        cursor: pointer;
+      }
+      .leftPanel-button:hover {
+        box-shadow: 0 4px 4px 0 rgba(100, 159, 219, 0.1);
+        border: solid 2px #649fdb;
+      }
+      .leftPanel-button::after {
+        content: "";
+        position: absolute;
+        right: 17px;
+        width: 20px;
+        height: 20px;
+        transform: rotate(180deg);
+        background-size: cover;
+        background-image: url(../../images/ios-arrow-back-4-32.png);
       }
       .left-panel-icon-kmailSetting,
       .left-panel-icon-accountSetting,
