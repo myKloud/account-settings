@@ -31,7 +31,8 @@ const Localization = new LocalizedStrings({
       emailAddress: "Email address",
       phoneNumber: "Phone Number",
       recoveryMethod: "Change recovery method",
-      receiveMessage: " You'll receive an email with confirmation code",
+      receiveMessage: "You'll receive an email with confirmation code",
+      receiveMessagePhone: "You'll receive an message with confirmation code",
     },
     validation: {
       firstName: {
@@ -51,8 +52,11 @@ const Localization = new LocalizedStrings({
       number: {
         required: "Please enter valid phone number or change the country code",
       },
+      currentPassword: {
+        required: "Please enter you'r password",
+      },
       password: {
-        required: "Enter password",
+        required: "please enter password",
         length:
           "Use 8 or more characters with a mix of letters, numbers & symbols",
         pattern:

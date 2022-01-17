@@ -46,7 +46,13 @@ const validate = (
       isValid = false;
     }
   }
-
+  if (input.name === "currentPassword") {
+    setCurrentMassMessage("");
+    if (!value.length) {
+      setCurrentMassMessage(input.required);
+      isValid = false;
+    }
+  }
   if (input.name === "password") {
     setPassMessage("");
     if (!value.length) {
